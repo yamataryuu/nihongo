@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f5f0">
+<title>日语 N5–N1 单词自测 · 2000 词</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #23201d;
+    --ink-2: #6b655e;
+    --line: #e8e3da;
+    --accent: #b4433a;
+    --accent-soft: #fbeeec;
+    --ok: #3f7a5e;
+    --ok-soft: #edf5f0;
+    --shadow: 0 10px 34px rgba(45, 36, 28, .07);
+    --radius: 20px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171614; --card: #22201d; --ink: #f1ece5; --ink-2: #a9a199;
+      --line: #38332d; --accent: #e0776c; --accent-soft: #3a2724;
+      --ok: #7fc3a0; --ok-soft: #24352c; --shadow: 0 10px 34px rgba(0,0,0,.3);
+    }
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink); min-height: 100dvh;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: max(20px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+    display: flex; justify-content: center;
+  }
+  .wrap { width: 100%; max-width: 560px; }
+
+  header { margin-bottom: 18px; }
+  .title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  h1 { font-size: 20px; letter-spacing: .02em; margin: 0; font-weight: 700; }
+  .sub { font-size: 12px; color: var(--ink-2); margin: 6px 0 0; line-height: 1.6; }
+  .toolbar { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  select {
+    appearance: none; background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 30px 7px 14px; font-size: 13px; font-family: inherit;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink-2) 50%), linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+    background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+  }
+  .mini {
+    border: 1px solid var(--line); background: transparent; color: var(--ink-2);
+    border-radius: 999px; padding: 7px 13px; font-size: 12px; font-family: inherit; cursor: pointer;
+  }
+  .mini:hover { color: var(--accent); border-color: var(--accent); }
+  .lang-note { font-size: 12px; color: var(--accent); }
+
+  .progress { height: 5px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 16px 0 10px; }
+  .progress > i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .28s ease; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; color: var(--ink-2); margin-bottom: 16px; }
+  .stats b { color: var(--ink); font-weight: 600; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 26px 22px 22px; min-height: 300px;
+    display: flex; flex-direction: column;
+  }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .badge {
+    font-size: 11px; letter-spacing: .04em; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 5px 11px; font-weight: 600;
+  }
+  .counter { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  .hint { font-size: 13px; color: var(--ink-2); margin: 26px 0 10px; }
+  .prompt {
+    font-size: clamp(30px, 9vw, 44px); line-height: 1.35; font-weight: 700;
+    letter-spacing: .01em; word-break: break-all; margin: 0 0 8px;
+  }
+  .prompt.zh { font-size: clamp(25px, 7vw, 34px); }
+  .spacer { flex: 1; min-height: 24px; }
+
+  .actions { display: flex; gap: 10px; }
+  .btn {
+    flex: 1; min-height: 52px; border-radius: 14px; font-size: 15px; font-weight: 600;
+    font-family: inherit; cursor: pointer; border: 1px solid var(--line);
+    background: transparent; color: var(--ink); transition: transform .12s ease, background .15s ease, border-color .15s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn:active { transform: scale(.975); }
+  .btn-ghost:hover { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.06); }
+  .btn.wide { width: 100%; margin-top: 22px; }
+  kbd {
+    font-family: inherit; font-size: 10px; font-weight: 500; opacity: .6;
+    border: 1px solid currentColor; border-radius: 5px; padding: 1px 5px; line-height: 1.4;
+  }
+
+  .detail { margin-top: 4px; border-top: 1px dashed var(--line); padding-top: 20px; }
+  .detail-jp { font-size: clamp(28px, 8vw, 38px); font-weight: 700; line-height: 1.3; }
+  .detail-kana { font-size: 17px; color: var(--accent); margin-top: 4px; letter-spacing: .04em; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { font-size: 12px; border-radius: 8px; padding: 6px 10px; background: var(--bg); border: 1px solid var(--line); color: var(--ink-2); }
+  .tag.pos { color: var(--ok); background: var(--ok-soft); border-color: transparent; font-weight: 600; }
+  .tag.zh { color: var(--ink); font-size: 13px; }
+
+  .done-title { font-size: 24px; font-weight: 700; margin: 22px 0 6px; }
+  .done-sub { font-size: 13px; color: var(--ink-2); margin: 0 0 20px; line-height: 1.6; }
+  .result { display: flex; gap: 10px; margin-bottom: 20px; }
+  .result > div { flex: 1; background: var(--bg); border-radius: 14px; padding: 14px 10px; text-align: center; }
+  .result b { display: block; font-size: 26px; font-variant-numeric: tabular-nums; }
+  .result span { font-size: 11px; color: var(--ink-2); }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 4px; max-height: 150px; overflow: auto; }
+  .chip { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .chip small { opacity: .7; margin-left: 4px; }
+  .done-actions { display: grid; gap: 9px; margin-top: 20px; }
+  .done-actions .btn { width: 100%; }
+
+  footer { margin-top: 16px; font-size: 11px; color: var(--ink-2); line-height: 1.8; text-align: center; }
+  @media (max-width: 360px) { .card { padding: 22px 16px 18px; } .actions { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>日语 N5–N1 单词自测</h1>
+      <span class="counter" id="headerCounter"></span>
+    </div>
+    <p class="sub" id="sub"></p>
+    <div class="toolbar">
+      <select id="levelSel" aria-label="级别范围">
+        <option value="all">全部级别 N5–N1</option>
+        <option value="N5">N5 入门</option>
+        <option value="N4">N4 初级</option>
+        <option value="N3">N3 初中级</option>
+        <option value="N2">N2 中高级</option>
+        <option value="N1">N1 最高级</option>
+      </select>
+      <select id="langSel" aria-label="出题方向">
+        <option value="mix">中文 / 日文 混合出题</option>
+        <option value="jp">只出日文</option>
+        <option value="zh">只出中文</option>
+      </select>
+      <select id="posSel" aria-label="词性筛选">
+        <option value="all">全部词性</option>
+        <option value="adv">副词</option>
+        <option value="conj">接续词 / 连词</option>
+        <option value="verb">动词</option>
+        <option value="a">い形容词</option>
+        <option value="na">な形容词</option>
+        <option value="noun">名词 / サ变</option>
+        <option value="kata">外来语</option>
+      </select>
+      <select id="sizeSel" aria-label="每轮题数">
+        <option value="20">每轮 20 题</option>
+        <option value="50" selected>每轮 50 题</option>
+        <option value="100">每轮 100 题</option>
+        <option value="0">一轮全量</option>
+      </select>
+      <button class="mini" id="btnReview" hidden>继续复习</button>
+      <button class="mini" id="btnReset">重新开始</button>
+      <span class="lang-note" id="langNote" hidden>下一题生效</span>
+    </div>
+  </header>
+
+  <div class="progress"><i id="bar"></i></div>
+  <div class="stats">
+    <span>熟悉 <b id="statKnown">0</b></span>
+    <span>待复习 <b id="statReview">0</b></span>
+    <span>本轮 <b id="statRound">0</b></span>
+    <span>范围词数 <b id="statTotal">0</b></span>
+  </div>
+
+  <main class="card" id="card">
+    <div class="card-top">
+      <span class="badge" id="badge">N5–N1</span>
+      <span class="counter" id="counter"></span>
+    </div>
+
+    <section id="askView">
+      <p class="hint" id="hint"></p>
+      <div class="prompt" id="prompt" aria-live="polite"></div>
+      <div class="spacer"></div>
+      <div class="actions" id="askActions">
+        <button class="btn btn-ghost" id="btnKnown">熟悉 <kbd>1</kbd></button>
+        <button class="btn btn-primary" id="btnUnknown">不熟悉 <kbd>2</kbd></button>
+      </div>
+    </section>
+
+    <section class="detail" id="detail" aria-live="polite" hidden>
+      <div class="detail-jp" id="dJp"></div>
+      <div class="detail-kana" id="dKana"></div>
+      <div class="meta">
+        <span class="tag pos" id="dPos"></span>
+        <span class="tag zh" id="dZh"></span>
+      </div>
+      <button class="btn btn-primary wide" id="btnNext">下一个词 <kbd>Enter</kbd></button>
+    </section>
+
+    <section id="doneView" hidden>
+      <div class="done-title">本轮完成 🎉</div>
+      <p class="done-sub" id="doneSub"></p>
+      <div class="result">
+        <div><b id="rKnown">0</b><span>熟悉跳过</span></div>
+        <div><b id="rUnknown">0</b><span>本轮需复习</span></div>
+        <div><b id="rTotal">0</b><span>本轮词数</span></div>
+      </div>
+      <p class="hint" style="margin:0 0 10px">本轮不熟悉的词</p>
+      <div class="chips" id="chips"></div>
+      <div class="done-actions">
+        <button class="btn btn-primary" id="btnAgain">再来一轮（本级随机）</button>
+        <button class="btn btn-ghost" id="btnOnlyReview">只练复习清单</button>
+        <button class="mini" id="btnClear" style="justify-self:center">清空复习记录</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    快捷键：1 / ← 熟悉　2 / → 不熟悉　Enter 下一个<br>
+    词库按 N5→N1 分级 2000 词，含副词 / 接续词 / 动词 / 形容词 / 外来语等 13 类词性<br>
+    增删词条请编辑 data/words.js，每条填 level / jp / kana / pos / zh 五项
+  </footer>
+</div>
+
+<script src="data/words.js"></script>
+<script>
+/* ============================================================
+   词库数据由 data/words.js 提供（window.WORDS_DATA）
+   单条格式：level / jp / kana / pos / zh
+   级别 N5（入门）→ N1（最高级），共 2000 词
+   增删词条后运行：node scripts/validate.cjs
+   ============================================================ */
+const RAW = Array.isArray(window.WORDS_DATA) ? window.WORDS_DATA : [];
+if (!RAW.length) {
+  document.body.innerHTML = '<div style="padding:24px;font:14px/1.8 sans-serif;color:#b4433a">词库文件 <code>data/words.js</code> 未能加载。请确认它与 <code>index.html</code> 位于同一目录，或使用本地服务器打开（<code>python3 -m http.server 8000</code>）。</div>';
+  throw new Error('WORDS_DATA is missing');
+}
+
+const WORDS = RAW.map(w => ({ ...w, id: w.level + ':' + w.jp }));
+const BY_ID = new Map(WORDS.map(w => [w.id, w]));
+const LEVEL_LABEL = { N5:'入门', N4:'初级', N3:'初中级', N2:'中高级', N1:'最高级' };
+const LS_KEY = 'n5n1_vocab_review_v3';
+const $ = s => document.querySelector(s);
+
+const state = {
+  queue: [], pos: 0, known: 0, roundUnknown: [],
+  review: new Set(), phase: 'ask',
+  level: 'all', lang: 'mix', posFilter: 'all', size: 50,
+  promptLang: 'jp', current: null
+};
+
+const POS_GROUPS = {
+  all: null,
+  adv: ['副词'],
+  conj: ['接续词・连词'],
+  verb: ['动词（五段）', '动词（一段）', '动词（カ行变格）', 'サ变动词（〜する）'],
+  a: ['い形容词'],
+  na: ['な形容词'],
+  noun: ['名词', 'サ变名词', '外来语（名词）', '代词'],
+  kata: ['外来语（名词）']
+};
+
+function scopeWords() {
+  let list = state.level === 'all' ? WORDS : WORDS.filter(w => w.level === state.level);
+  const group = POS_GROUPS[state.posFilter];
+  if (group) list = list.filter(w => group.includes(w.pos));
+  return list;
+}
+function scopeIds() { return new Set(scopeWords().map(w => w.id)); }
+function reviewInScope() {
+  const ids = scopeIds();
+  return [...state.review].filter(id => ids.has(id));
+}
+function scopeLabel() {
+  return state.level === 'all' ? '全部级别' : `${state.level}（${LEVEL_LABEL[state.level]}）`;
+}
+function loadReview() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+    return new Set(Array.isArray(raw) ? raw.filter(id => BY_ID.has(id)) : []);
+  } catch (e) { return new Set(); }
+}
+function saveReview() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify([...state.review])); } catch (e) { /* 隐私模式下忽略 */ }
+}
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function pickLang() {
+  return state.lang === 'mix' ? (Math.random() < 0.5 ? 'jp' : 'zh') : state.lang;
+}
+
+function startRound(onlyReview = false) {
+  const scope = scopeWords();
+  let ids = onlyReview ? reviewInScope() : scope.map(w => w.id);
+  if (!ids.length) ids = scope.map(w => w.id);          // 复习清单为空时兜底
+  ids = shuffle(ids);
+  if (!onlyReview && state.size > 0 && state.size < ids.length) ids = ids.slice(0, state.size);
+  state.queue = ids.map(id => BY_ID.get(id));
+  state.pos = 0;
+  state.known = 0;
+  state.roundUnknown = [];
+  state.phase = 'ask';
+  next();
+}
+
+function next() {
+  if (state.pos >= state.queue.length) { finish(); return; }
+  state.current = state.queue[state.pos];
+  state.promptLang = pickLang();
+  state.phase = 'ask';
+  render();
+}
+function advance() { state.pos += 1; next(); }
+
+function answer(known) {
+  const w = state.current;
+  if (known) {
+    state.known += 1;
+    state.review.delete(w.id);
+    saveReview();
+    advance();
+  } else {
+    state.roundUnknown.push(w.id);
+    state.review.add(w.id);
+    saveReview();
+    state.phase = 'reveal';
+    render();
+  }
+}
+function finish() { state.phase = 'done'; render(); }
+
+function renderStats() {
+  const total = state.queue.length || scopeWords().length;
+  const done = Math.min(state.pos, total);
+  const reviewCount = reviewInScope().length;
+  $('#bar').style.width = (state.phase === 'done' ? 100 : (done / total) * 100) + '%';
+  $('#counter').textContent = state.phase === 'done' ? '已完成' : `${state.pos + 1} / ${total}`;
+  $('#headerCounter').textContent = `${Math.min(state.pos + 1, total)} / ${total}`;
+  $('#statKnown').textContent = state.known;
+  $('#statReview').textContent = reviewCount;
+  $('#statRound').textContent = state.queue.length;
+  $('#statTotal').textContent = scopeWords().length;
+  const other = state.review.size - reviewCount;
+  const extra = (state.level !== 'all' && other > 0) ? ` · 其他级别另有 ${other} 词待复习` : '';
+  const posName = $('#posSel').selectedOptions[0].textContent;
+  const sizeName = state.size ? `每轮 ${Math.min(state.size, scopeWords().length)} 题` : '一轮全量';
+  $('#sub').textContent = `词库 2000 词 · ${scopeLabel()} / ${posName} · ${sizeName} · 不认识才展开词性 / 译文 / 读音${extra}`;
+  $('#btnReview').hidden = reviewCount === 0;
+  $('#btnReview').textContent = `继续复习（${reviewCount}）`;
+}
+
+function render() {
+  renderStats();
+  const ask = $('#askView'), detail = $('#detail'), done = $('#doneView');
+  ask.hidden = state.phase === 'done';
+  detail.hidden = state.phase !== 'reveal';
+  done.hidden = state.phase !== 'done';
+  $('#askActions').hidden = state.phase === 'reveal';
+  $('#badge').textContent = state.phase === 'done'
+    ? '结果'
+    : `${state.current.level} · ${state.promptLang === 'jp' ? '日文题干' : '中文题干'}`;
+
+  if (state.phase === 'done') {
+    const reviewCount = reviewInScope().length;
+    $('#rKnown').textContent = state.known;
+    $('#rUnknown').textContent = state.roundUnknown.length;
+    $('#rTotal').textContent = state.queue.length;
+    $('#doneSub').textContent = '不熟悉的词已加入复习清单，下次打开还能继续练（复习按当前级别范围筛选）。';
+    const scopeName = state.level === 'all' ? '全部' : state.level;
+    $('#btnAgain').textContent = `再来一轮（${scopeName} · ${state.size ? state.size + ' 题' : '全量'}）`;
+    $('#btnOnlyReview').textContent = state.level === 'all'
+      ? `只练复习清单（${reviewCount}）` : `只练本级待复习（${reviewCount}）`;
+    $('#btnClear').textContent = state.level === 'all' ? '清空全部复习记录' : `清空 ${state.level} 复习记录`;
+    const box = $('#chips');
+    box.replaceChildren();
+    if (!state.roundUnknown.length) {
+      const s = document.createElement('span');
+      s.className = 'chip'; s.textContent = '全部熟悉，太稳了';
+      box.appendChild(s);
+    } else {
+      state.roundUnknown.forEach(id => {
+        const w = BY_ID.get(id);
+        const c = document.createElement('span');
+        c.className = 'chip';
+        c.textContent = w.jp;
+        const small = document.createElement('small');
+        small.textContent = `${w.level} · ${w.kana}`;
+        c.appendChild(small);
+        box.appendChild(c);
+      });
+    }
+    $('#btnOnlyReview').hidden = reviewCount === 0;
+    $('#btnClear').hidden = reviewCount === 0;
+    return;
+  }
+
+  const w = state.current;
+  const isJp = state.promptLang === 'jp';
+  $('#hint').textContent = isJp ? '这个词你熟悉吗？' : '能想起对应的日语词吗？';
+  const p = $('#prompt');
+  p.textContent = isJp ? w.jp : w.zh;
+  p.classList.toggle('zh', !isJp);
+
+  if (state.phase === 'reveal') {
+    $('#dJp').textContent = w.jp;
+    $('#dKana').textContent = w.kana === w.jp
+      ? '【读音】同词形（假名书写）'
+      : `【读音】${w.kana}`;
+    $('#dPos').textContent = w.pos;
+    $('#dZh').textContent = w.zh;
+  }
+}
+
+/* ---------- 事件绑定 ---------- */
+$('#btnKnown').addEventListener('click', () => state.phase === 'ask' && answer(true));
+$('#btnUnknown').addEventListener('click', () => state.phase === 'ask' && answer(false));
+$('#btnNext').addEventListener('click', () => state.phase === 'reveal' && advance());
+$('#btnAgain').addEventListener('click', () => startRound(false));
+$('#btnOnlyReview').addEventListener('click', () => startRound(true));
+$('#btnReview').addEventListener('click', () => startRound(true));
+$('#btnReset').addEventListener('click', () => startRound(false));
+$('#btnClear').addEventListener('click', () => {
+  for (const id of reviewInScope()) state.review.delete(id);
+  saveReview(); renderStats();
+  $('#btnClear').hidden = true;
+  $('#btnOnlyReview').hidden = true;
+});
+$('#levelSel').addEventListener('change', e => {
+  state.level = e.target.value;
+  startRound(false);                       // 切级别立即按新范围重开一轮
+});
+$('#posSel').addEventListener('change', e => {
+  state.posFilter = e.target.value;
+  startRound(false);
+});
+$('#sizeSel').addEventListener('change', e => {
+  state.size = Number(e.target.value);
+  startRound(false);
+});
+$('#langSel').addEventListener('change', e => {
+  state.lang = e.target.value;
+  $('#langNote').hidden = false;
+  clearTimeout(window.__langNoteTimer);
+  window.__langNoteTimer = setTimeout(() => { $('#langNote').hidden = true; }, 1600);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.target.matches('select, input, textarea')) return;
+  if (state.phase === 'ask') {
+    if (e.key === '1' || e.key === 'ArrowLeft') { e.preventDefault(); answer(true); }
+    else if (e.key === '2' || e.key === 'ArrowRight') { e.preventDefault(); answer(false); }
+  } else if (state.phase === 'reveal') {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); advance(); }
+  } else if (state.phase === 'done' && e.key === 'Enter') {
+    e.preventDefault(); startRound(false);
+  }
+});
+
+state.review = loadReview();
+renderStats();
+startRound(false);
+</script>
+</body>
+</html>
